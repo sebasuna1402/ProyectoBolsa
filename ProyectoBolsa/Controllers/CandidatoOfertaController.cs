@@ -31,7 +31,7 @@ namespace ProyectoBolsa.Controllers
         }
 
         [HttpPost]
-        public async Task<ActionResult<OfertaCandidato>> PostCandidatoOferta(CandidatoOfertaVm candidatoofertaRequest)
+        public async Task<ActionResult<OfertaCandidato>> PostCandidatoOferta(OfertaCandidatoVm candidatoofertaRequest)
         {
             OfertaCandidato newCandidatoOferta = new OfertaCandidato();
             newCandidatoOferta.CandidatoId = candidatoofertaRequest.CandidatoId;

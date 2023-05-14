@@ -19,7 +19,7 @@ namespace ProyectoBolsa.Controllers
         }
 
         [HttpPost]
-        public async Task<ActionResult<FormacionAcademica>> PostFormacion(FormacionAVm formacionRequest)
+        public async Task<ActionResult<FormacionAcademica>> PostFormacion(FormacionAcademicaVm formacionRequest)
         {
             if (_context.FormacionAcademica == null)
             {

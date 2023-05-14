@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Services
 {
-    public class FormacionAVm
+    public class FormacionAcademicaVm
     {
 
         public int Id { get; set; }
