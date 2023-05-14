@@ -52,8 +52,7 @@ namespace ProyectoBolsa.Controllers
                    .ToListAsync();
 
 
-            //reunirse con el profe para preguntarle como hacer bien el select column
-
+          
             return listaCandidatos;
         }
 

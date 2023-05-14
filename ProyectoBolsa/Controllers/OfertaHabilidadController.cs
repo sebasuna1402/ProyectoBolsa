@@ -31,7 +31,7 @@ namespace ProyectoBolsa.Controllers
         }
 
         [HttpPost]
-        public async Task<ActionResult<HabilidadOferta>> PostOfertaHabilidad(OfertaHabilidadVm ofertahabilidadRequest)
+        public async Task<ActionResult<HabilidadOferta>> PostOfertaHabilidad(HabilidadOfertaVm ofertahabilidadRequest)
         {
             HabilidadOferta newOfertaHabilidad = new HabilidadOferta();
             newOfertaHabilidad.OfertaId = ofertahabilidadRequest.OfertaId;

@@ -32,7 +32,7 @@ namespace ProyectoBolsa.Controllers
         }
 
         [HttpPost]
-        public async Task<ActionResult<HabilidadesTecnicas>> PostHabilidad(HabilidadesVm habilidadRequest)
+        public async Task<ActionResult<HabilidadesTecnicas>> PostHabilidad(HabilidadesTecnicasVm habilidadRequest)
         {
             if (_context.HabilidadesTecnicas == null)
             {
