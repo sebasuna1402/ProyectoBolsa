@@ -1,24 +1,27 @@
+
+
 using Microsoft.EntityFrameworkCore;
+using DataAccess;
+using Services;
 using ProyectoBolsa.Data;
 
 var builder = WebApplication.CreateBuilder(args);
+
+builder.Services.AddDataAccess(builder.Configuration);
+builder.Services.AddServices(builder.Configuration);
 
 //Para SQL server
 builder.Services.AddDbContext<MyApiContext>(options =>
 options.UseSqlServer(builder.Configuration.GetConnectionString("MyApiContext") ?? throw new InvalidOperationException("Connection string 'MyApiContext' not found.")));
 
-//Para MySQL
-//builder.Services.AddDbContext<MyApiContext>(options =>
-//options.UseMySQL(builder.Configuration.GetConnectionString("MyApiContext_MySql") ?? throw new InvalidOperationException("Connection string 'MyApiContext' not found.")));
 
-//BD en memoria
 //builder.Services.AddDbContext<MyApiContext>(options =>
 //options.UseInMemoryDatabase("ExamenBD"));
 
 
 var MyAllowSpecificOrigins = "_myAllowSpecificOrigins";
 
-// Add services to the container.
+
 
 builder.Services.AddCors(options =>
 {

@@ -15,23 +15,22 @@ namespace Services.Services
         {
             _context = context;
         }
-
-        public async Task<List<OfertaCandidato>> GetAll()
+        public async Task<List<OfertaCandidatoVm>> GetAll()
         {
-        
-            List<OfertaCandidato> listaOfertaCandidato = await _context.OfertaCandidato.ToListAsync();
 
-            List<OfertaCandidatoVm> listaOfertaCandidatoVm = new List<OfertaCandidatoVm>();
+            List<OfertaCandidato> listaCandidatoOferta = await _context.OfertaCandidato.ToListAsync();
 
-            foreach (OfertaCandidato ofertaCandidato in listaOfertaCandidato)
+            List<OfertaCandidatoVm> listaCandidatoOfertaVm = new List<OfertaCandidatoVm>();
+
+            foreach (OfertaCandidato candidatoOferta in listaCandidatoOferta)
             {
-                OfertaCandidatoVm newOfertaCandidatoVm = new OfertaCandidatoVm();
-                newOfertaCandidatoVm.CandidatoId = ofertaCandidato.CandidatoId;
-                newOfertaCandidatoVm.OfertaId = ofertaCandidato.OfertaId;
-                listaOfertaCandidatoVm.Add(newOfertaCandidatoVm);
+                OfertaCandidatoVm newCandidatoOfertaVm = new OfertaCandidatoVm();
+                newCandidatoOfertaVm.CandidatoId = candidatoOferta.CandidatoId;
+                newCandidatoOfertaVm.OfertaId = candidatoOferta.OfertaId;
+                listaCandidatoOfertaVm.Add(newCandidatoOfertaVm);
             }
 
-            return listaOfertaCandidatoVm;
+            return listaCandidatoOfertaVm;
         }
 
         public async Task<OfertaCandidato> GetById(int id_candidato, int id_oferta)
