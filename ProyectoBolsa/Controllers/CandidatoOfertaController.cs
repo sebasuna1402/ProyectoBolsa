@@ -4,70 +4,64 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using ProyectoBolsa.Data;
 using Services;
+using Services.IServices;
 
 namespace ProyectoBolsa.Controllers
 {
+    //guiarse con el ejemplo del prof
+
     [Route("api/[controller]")]
     [ApiController]
-    public class CandidatoOfertaController : ControllerBase
+    public class CandidatoOfertaController : Controller
     {
-        private readonly MyApiContext _context;
-        public CandidatoOfertaController(MyApiContext context)
+
+        private readonly ICandidatoOfertaService _candidatoofertaService;
+
+        public CandidatoOfertaController(ICandidatoOfertaService candidatoofertaService)
         {
-            _context = context;
+            _candidatoofertaService = candidatoofertaService;
         }
 
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<OfertaCandidato>>> GetCandidatoOferta()
+        public async Task<ActionResult<IEnumerable<OfertaCandidatoVm>>> GetCandidatoOferta()
         {
-            if (_context.OfertaCandidato == null)
+            List<OfertaCandidatoVm> listCandidatoofertaVm = await _candidatoofertaService.GetAll();
+
+            if (listCandidatoofertaVm == null)
             {
                 return NotFound();
             }
 
-            List<OfertaCandidato> listaCandidatoOferta = await _context.OfertaCandidato.ToListAsync();
-
-            return listaCandidatoOferta;
+            return Ok(listCandidatoofertaVm);
         }
 
         [HttpPost]
         public async Task<ActionResult<OfertaCandidato>> PostCandidatoOferta(OfertaCandidatoVm candidatoofertaRequest)
         {
-            OfertaCandidato newCandidatoOferta = new OfertaCandidato();
-            newCandidatoOferta.CandidatoId = candidatoofertaRequest.CandidatoId;
-            newCandidatoOferta.OfertaId = candidatoofertaRequest.OfertaId;
-
-            if (_context.OfertaCandidato == null)
+            if (candidatoofertaRequest == null)
             {
-                return Problem("Entity set 'MyApiContext.CandidatoOferta'  is null.");
+                return BadRequest();
             }
-            _context.OfertaCandidato.Add(newCandidatoOferta);
-            await _context.SaveChangesAsync();
+
+            OfertaCandidato newCandidatoOferta = await _candidatoofertaService.Create(candidatoofertaRequest);
 
             return CreatedAtAction("GetCandidatoOferta", new { id = newCandidatoOferta.CandidatoId }, newCandidatoOferta);
+
         }
 
         [HttpDelete]
         public async Task<IActionResult> DeleteCandidatoOferta(int id_candidato, int id_oferta)
         {
-            if (_context.OfertaCandidato == null)
+            var candidatooferta = await _candidatoofertaService.GetById(id_candidato, id_oferta);
+            if (candidatooferta == null)
             {
                 return NotFound();
             }
 
-            OfertaCandidato newCandidatoOferta = new OfertaCandidato();
-            newCandidatoOferta = _context.OfertaCandidato.SingleOrDefault(pc => pc.CandidatoId == id_candidato && pc.OfertaId == id_oferta);
-
-            if (newCandidatoOferta == null)
-            {
-                return NotFound();
-            }
-
-            _context.OfertaCandidato.Remove(newCandidatoOferta);
-            await _context.SaveChangesAsync();
-
+            await _candidatoofertaService.Delete(id_candidato, id_oferta);
             return NoContent();
         }
+
 
     }
 }

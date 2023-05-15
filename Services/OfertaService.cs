@@ -1,5 +1,7 @@
 ﻿
+using DataAccess.Entidades;
 using Microsoft.EntityFrameworkCore;
+using ProyectoBolsa.Data;
 using Services.IServices;
 using System;
 using System.Collections.Generic;
@@ -28,8 +30,8 @@ namespace Services.Services
                 Id = c.Id,
                 Descripcion = c.Descripcion,
                 EmpresaId = c.EmpresaId,
-                OfertaHabilidades = c.OfertaHabilidades,
-                CandidatoOfertas = c.CandidatoOfertas,
+                HabilidadOfertas = c.HabilidadOfertas,
+                OfertaCandidatos = c.OfertaCandidatos,
             })
                    .ToListAsync();
 

@@ -72,10 +72,7 @@ namespace Services.Services
             newCandidato.Telefono = candidatoRequest.Telefono;
             newCandidato.ResumenPersonal = candidatoRequest.ResumenPersonal;
 
-            //if (_context.Candidato == null)
-            //{
-            //    return Problem("Entity set 'MyApiContext.Candidato'  is null.");
-            //}
+         
 
             _context.Candidato.Add(newCandidato);
             await _context.SaveChangesAsync();

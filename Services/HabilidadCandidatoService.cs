@@ -1,5 +1,7 @@
 ﻿
+using DataAccess.Entidades;
 using Microsoft.EntityFrameworkCore;
+using ProyectoBolsa.Data;
 using Services.IServices;
 using System;
 using System.Collections.Generic;
@@ -18,33 +20,33 @@ namespace Services.Services
             _context = context;
         }
 
-        public async Task<List<CandidatoHabilidadVm>> GetAll()
+        public async Task<List<HabilidadCandidatoVm>> GetAll()
         {
-            List<CandidatoHabilidad> listaCandidatoHabilidad = await _context.CandidatoHabilidad.ToListAsync();
+            List<HabilidadCandidato> listaCandidatoHabilidad = await _context.HabilidadCandidato.ToListAsync();
 
-            List<CandidatoHabilidadVm> listaHabilidadVm = new List<CandidatoHabilidadVm>();
+            List<HabilidadCandidatoVm> listaHabilidadVm = new List<HabilidadCandidatoVm>();
 
-            foreach (CandidatoHabilidad candidatoHabilidad in listaCandidatoHabilidad)
+            foreach (HabilidadCandidato habilidadCandidato in listaCandidatoHabilidad)
             {
-                CandidatoHabilidadVm newCandidatoHabilidadVm = new CandidatoHabilidadVm();
-                newCandidatoHabilidadVm.HabilidadId = candidatoHabilidad.HabilidadId;
-                newCandidatoHabilidadVm.CandidatoId = candidatoHabilidad.CandidatoId;
+                HabilidadCandidatoVm newCandidatoHabilidadVm = new HabilidadCandidatoVm();
+                newCandidatoHabilidadVm.HabilidadId = habilidadCandidato.HabilidadId;
+                newCandidatoHabilidadVm.CandidatoId = habilidadCandidato.CandidatoId;
                 listaHabilidadVm.Add(newCandidatoHabilidadVm);
             }
 
             return listaHabilidadVm;
         }
 
-        public async Task<CandidatoHabilidad> GetById(int id_candidato, int id_habilidad)
+        public async Task<HabilidadCandidato> GetById(int id_candidato, int id_habilidad)
         {
-            CandidatoHabilidad newCandidatoHabilidad = new CandidatoHabilidad();
-            newCandidatoHabilidad = _context.CandidatoHabilidad.SingleOrDefault(pc => pc.CandidatoId == id_candidato && pc.HabilidadId == id_habilidad);
+            HabilidadCandidato newCandidatoHabilidad = new HabilidadCandidato();
+            newCandidatoHabilidad = _context.HabilidadCandidato.SingleOrDefault(pc => pc.CandidatoId == id_candidato && pc.HabilidadId == id_habilidad);
 
             return newCandidatoHabilidad;
         }
-        public async Task<CandidatoHabilidad> Create(CandidatoHabilidadVm candidatohabilidadRequest)
+        public async Task<HabilidadCandidato> Create(HabilidadCandidatoVm candidatohabilidadRequest)
         {
-            CandidatoHabilidad newCandidatoHabilidad = new CandidatoHabilidad();
+            HabilidadCandidato newCandidatoHabilidad = new HabilidadCandidato();
             newCandidatoHabilidad.CandidatoId = candidatohabilidadRequest.CandidatoId;
             newCandidatoHabilidad.HabilidadId = candidatohabilidadRequest.HabilidadId;
 
@@ -53,7 +55,7 @@ namespace Services.Services
             //   return Problem("Entity set 'MyApiContext.CandidatoHabilidad'  is null.");
             //}
 
-            _context.CandidatoHabilidad.Add(newCandidatoHabilidad);
+            _context.HabilidadCandidato.Add(newCandidatoHabilidad);
             await _context.SaveChangesAsync();
 
             return newCandidatoHabilidad;
@@ -62,10 +64,10 @@ namespace Services.Services
         public async Task Delete(int id_candidato, int id_habilidad) 
         {
     
-            CandidatoHabilidad newCandidatoHabilidad = new CandidatoHabilidad();
-            newCandidatoHabilidad = _context.CandidatoHabilidad.SingleOrDefault(pc => pc.CandidatoId == id_candidato && pc.HabilidadId == id_habilidad);
+            HabilidadCandidato newCandidatoHabilidad = new HabilidadCandidato();
+            newCandidatoHabilidad = _context.HabilidadCandidato.SingleOrDefault(pc => pc.CandidatoId == id_candidato && pc.HabilidadId == id_habilidad);
 
-            _context.CandidatoHabilidad.Remove(newCandidatoHabilidad);
+            _context.HabilidadCandidato.Remove(newCandidatoHabilidad);
             await _context.SaveChangesAsync();
 
         }

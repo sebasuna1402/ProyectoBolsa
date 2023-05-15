@@ -1,5 +1,7 @@
 ﻿
+using DataAccess.Entidades;
 using Microsoft.EntityFrameworkCore;
+using ProyectoBolsa.Data;
 using Services.IServices;
 using System;
 using System.Collections.Generic;
@@ -18,16 +20,16 @@ namespace Services.Services
             _context = context;
         }
 
-        public async Task<List<OfertaHabilidadVm>> GetAll()
+        public async Task<List<HabilidadOfertaVm>> GetAll()
         {
 
-            List<OfertaHabilidad> listaOfertaHabilidad = await _context.OfertaHabilidad.ToListAsync();
+            List<HabilidadOferta> listaOfertaHabilidad = await _context.HabilidadOferta.ToListAsync();
 
-            List<OfertaHabilidadVm> listaOfertaHabilidadVm = new List<OfertaHabilidadVm>();
+            List<HabilidadOfertaVm> listaOfertaHabilidadVm = new List<HabilidadOfertaVm>();
 
-            foreach (OfertaHabilidad ofertaHabilidad in listaOfertaHabilidad)
+            foreach (HabilidadOferta ofertaHabilidad in listaOfertaHabilidad)
             {
-                OfertaHabilidadVm newOfertaHabilidadVm = new OfertaHabilidadVm();
+                HabilidadOfertaVm newOfertaHabilidadVm = new HabilidadOfertaVm();
                 newOfertaHabilidadVm.OfertaId = ofertaHabilidad.OfertaId;
                 newOfertaHabilidadVm.HabilidadId = ofertaHabilidad.HabilidadId;
                 listaOfertaHabilidadVm.Add(newOfertaHabilidadVm);
@@ -36,26 +38,23 @@ namespace Services.Services
             return listaOfertaHabilidadVm;
         }
 
-        public async Task<OfertaHabilidad> GetById(int id_oferta, int id_habilidad)
+        public async Task<HabilidadOferta> GetById(int id_oferta, int id_habilidad)
         {
-            OfertaHabilidad newOfertaHabilidad = new OfertaHabilidad();
-            newOfertaHabilidad = _context.OfertaHabilidad.SingleOrDefault(pc => pc.OfertaId == id_oferta && pc.HabilidadId == id_habilidad);
+            HabilidadOferta newOfertaHabilidad = new HabilidadOferta();
+            newOfertaHabilidad = _context.HabilidadOferta.SingleOrDefault(pc => pc.OfertaId == id_oferta && pc.HabilidadId == id_habilidad);
 
             return newOfertaHabilidad;
         }
 
-        public async Task<OfertaHabilidad> Create(OfertaHabilidadVm ofertahabilidadRequest)
+        public async Task<HabilidadOferta> Create(HabilidadOfertaVm ofertahabilidadRequest)
         {
-            OfertaHabilidad newOfertaHabilidad = new OfertaHabilidad();
+            HabilidadOferta newOfertaHabilidad = new HabilidadOferta();
             newOfertaHabilidad.OfertaId = ofertahabilidadRequest.OfertaId;
             newOfertaHabilidad.HabilidadId = ofertahabilidadRequest.HabilidadId;
 
-            //if (_context.OfertaHabilidad == null)
-            //{
-            //    return Problem("Entity set 'MyApiContext.OfertaHabilidad'  is null.");
-            //}
+       
 
-            _context.OfertaHabilidad.Add(newOfertaHabilidad);
+            _context.HabilidadOferta.Add(newOfertaHabilidad);
             await _context.SaveChangesAsync();
 
             return newOfertaHabilidad;
@@ -65,10 +64,10 @@ namespace Services.Services
         public async Task Delete(int id_oferta, int id_habilidad)
         {        
 
-            OfertaHabilidad newOfertaHabilidad = new OfertaHabilidad();
-            newOfertaHabilidad = _context.OfertaHabilidad.SingleOrDefault(pc => pc.OfertaId == id_oferta && pc.HabilidadId == id_habilidad);         
+            HabilidadOferta newOfertaHabilidad = new HabilidadOferta();
+            newOfertaHabilidad = _context.HabilidadOferta.SingleOrDefault(pc => pc.OfertaId == id_oferta && pc.HabilidadId == id_habilidad);         
 
-            _context.OfertaHabilidad.Remove(newOfertaHabilidad);
+            _context.HabilidadOferta.Remove(newOfertaHabilidad);
             await _context.SaveChangesAsync();
         }
 

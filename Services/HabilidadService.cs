@@ -1,5 +1,7 @@
 ﻿
+using DataAccess.Entidades;
 using Microsoft.EntityFrameworkCore;
+using ProyectoBolsa.Data;
 using Services.IServices;
 using System;
 using System.Collections.Generic;
@@ -18,16 +20,16 @@ namespace Services.Services
             _context = context;
         }
 
-        public async Task<List<HabilidadVm>> GetAll()
+        public async Task<List<HabilidadesTecnicasVm>> GetAll()
         {
 
-            List<Habilidad> listaHabilidad = await _context.Habilidad.ToListAsync();
+            List<HabilidadesTecnicas> listaHabilidad = await _context.HabilidadesTecnicas.ToListAsync();
 
-            List<HabilidadVm> listaHabilidadVm = new List<HabilidadVm>();
+            List<HabilidadesTecnicasVm> listaHabilidadVm = new List<HabilidadesTecnicasVm>();
 
-            foreach (Habilidad habilidad in listaHabilidad)
+            foreach (HabilidadesTecnicas habilidad in listaHabilidad)
             {
-                HabilidadVm newHabilidadVm = new HabilidadVm();
+                HabilidadesTecnicasVm newHabilidadVm = new HabilidadesTecnicasVm();
                 newHabilidadVm.Id = habilidad.Id;
                 newHabilidadVm.Nombre = habilidad.Nombre;
                 listaHabilidadVm.Add(newHabilidadVm);
@@ -36,29 +38,29 @@ namespace Services.Services
             return listaHabilidadVm;
         }
 
-        public async Task<Habilidad> GetById(int id)
+        public async Task<HabilidadesTecnicas> GetById(int id)
         {
-            var habilidad = await _context.Habilidad.FindAsync(id);
+            var habilidad = await _context.HabilidadesTecnicas.FindAsync(id);
 
             return habilidad;
         }
 
-        public async Task<Habilidad> Create(HabilidadVm habilidadRequest)
+        public async Task<HabilidadesTecnicas> Create(HabilidadesTecnicasVm habilidadRequest)
         {
 
-            Habilidad newHabilidad = new Habilidad();
+            HabilidadesTecnicas newHabilidad = new HabilidadesTecnicas();
             newHabilidad.Id = habilidadRequest.Id;
             newHabilidad.Nombre = habilidadRequest.Nombre;
 
-            _context.Habilidad.Add(newHabilidad);
+            _context.HabilidadesTecnicas.Add(newHabilidad);
             await _context.SaveChangesAsync();
 
             return newHabilidad;
         }
 
-        public async Task Update(int id, HabilidadVm habilidadRequest)
+        public async Task Update(int id, HabilidadesTecnicasVm habilidadRequest)
         {
-            Habilidad HabilidadEdit = await _context.Habilidad.FindAsync(id);
+            HabilidadesTecnicas HabilidadEdit = await _context.HabilidadesTecnicas.FindAsync(id);
 
             HabilidadEdit.Nombre = habilidadRequest.Nombre;
 
@@ -70,9 +72,9 @@ namespace Services.Services
         public async Task Delete(int id)
         {
 
-            var habilidad = await _context.Habilidad.FindAsync(id);
+            var habilidad = await _context.HabilidadesTecnicas.FindAsync(id);
 
-            _context.Habilidad.Remove(habilidad);
+            _context.HabilidadesTecnicas.Remove(habilidad);
             await _context.SaveChangesAsync();
         }
 

@@ -16,20 +16,22 @@ namespace Services
         {
             services.AddScoped<ICandidatoService, CandidatoService>();//revisado
            
-            services.AddScoped<ICandidatoHabilidadService, HabilidadCandidatoService>();
+            services.AddScoped<ICandidatoHabilidadService, HabilidadCandidatoService>();//revisado
             
             services.AddScoped<ICandidatoOfertaService, CandidatoOfertaService>();//revisado
 
 
-            services.AddScoped<IOfertaHabilidadService, OfertaHabilidadService>();
+            services.AddScoped<IOfertaHabilidadService, OfertaHabilidadService>();//revisado
           
-            services.AddScoped<IHabilidadService, HabilidadService>();
+            services.AddScoped<IHabilidadService, HabilidadService>();// revisado
            
-            services.AddScoped<IFormacionService, FormacionService>();
+            services.AddScoped<IFormacionService, FormacionService>();// revisado
            
-            services.AddScoped<IOfertaService, OfertaService>();
+            services.AddScoped<IOfertaService, OfertaService>();// revisado
            
-            services.AddScoped<IEmpresaService, EmpresaService>();
+            services.AddScoped<IEmpresaService, EmpresaService>(); //revisado
+
+
             return services;
         }
     }

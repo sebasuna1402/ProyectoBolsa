@@ -1,4 +1,5 @@
 ﻿
+using DataAccess.Entidades;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,13 +10,13 @@ namespace Services.IServices
 {
     public interface IHabilidadService
     {
-        public Task<List<HabilidadVm>> GetAll();
+        public Task<List<HabilidadesTecnicasVm>> GetAll();
 
-        public Task<Habilidad> GetById(int id);
+        public Task<HabilidadesTecnicas> GetById(int id);
 
-        public Task<Habilidad> Create(HabilidadVm habilidadRequest);
+        public Task<HabilidadesTecnicas> Create(HabilidadesTecnicasVm habilidadRequest);
 
-        public Task Update(int id, HabilidadVm habilidadRequest);
+        public Task Update(int id, HabilidadesTecnicasVm habilidadRequest);
 
         public Task Delete(int id);
     }

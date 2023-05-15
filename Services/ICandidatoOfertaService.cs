@@ -16,3 +16,4 @@ namespace Services.IServices
         public Task Delete(int id_candidato, int id_oferta);
     }
 }
+//xd

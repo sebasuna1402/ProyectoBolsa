@@ -4,45 +4,44 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using ProyectoBolsa.Data;
 using Services;
+using Services.IServices;
 
 namespace ProyectoBolsa.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class CandidatoHabilidadesController : ControllerBase
+    public class CandidatoHabilidadController : Controller
     {
-        private readonly MyApiContext _context;
-        public CandidatoHabilidadesController(MyApiContext context)
+        private readonly ICandidatoHabilidadService _candidatohabilidadService;
+
+        public CandidatoHabilidadController(ICandidatoHabilidadService candidatohabilidadService)
         {
-            _context = context;
+            _candidatohabilidadService = candidatohabilidadService;
         }
 
+
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<HabilidadCandidato>>> GetCandidatoHabilidad()
+        public async Task<ActionResult<IEnumerable<HabilidadCandidatoVm>>> GetCandidatoHabilidad()
         {
-            if (_context.HabilidadCandidato == null)
+            List<HabilidadCandidatoVm> listCandidatoHabilidadVm = await _candidatohabilidadService.GetAll();
+
+            if (listCandidatoHabilidadVm == null)
             {
                 return NotFound();
             }
 
-            List<HabilidadCandidato> listaCandidatoHabilidad = await _context.HabilidadCandidato.ToListAsync();
-
-            return listaCandidatoHabilidad;
+            return Ok(listCandidatoHabilidadVm);
         }
 
         [HttpPost]
         public async Task<ActionResult<HabilidadCandidato>> PostCandidatoHabilidad(HabilidadCandidatoVm candidatohabilidadRequest)
         {
-            HabilidadCandidato newCandidatoHabilidad = new HabilidadCandidato();
-            newCandidatoHabilidad.CandidatoId = candidatohabilidadRequest.CandidatoId;
-            newCandidatoHabilidad.HabilidadId = candidatohabilidadRequest.HabilidadId;
-
-            if (_context.HabilidadCandidato == null)
+            if (candidatohabilidadRequest == null)
             {
-                return Problem("Entity set 'MyApiContext.CandidatoHabilidad'  is null.");
+                return BadRequest();
             }
-            _context.HabilidadCandidato.Add(newCandidatoHabilidad);
-            await _context.SaveChangesAsync();
+
+            HabilidadCandidato newCandidatoHabilidad = await _candidatohabilidadService.Create(candidatohabilidadRequest);
 
             return CreatedAtAction("GetCandidatoHabilidad", new { id = newCandidatoHabilidad.CandidatoId }, newCandidatoHabilidad);
         }
@@ -50,22 +49,13 @@ namespace ProyectoBolsa.Controllers
         [HttpDelete]
         public async Task<IActionResult> DeleteCandidatoHabilidad(int id_candidato, int id_habilidad)
         {
-            if (_context.HabilidadCandidato == null)
+            var candidatohabilidad = await _candidatohabilidadService.GetById(id_candidato, id_habilidad);
+            if (candidatohabilidad == null)
             {
                 return NotFound();
             }
 
-            HabilidadCandidato newCandidatoHabilidad = new HabilidadCandidato();
-            newCandidatoHabilidad = _context.HabilidadCandidato.SingleOrDefault(pc => pc.CandidatoId == id_candidato && pc.HabilidadId == id_habilidad);
-
-            if (newCandidatoHabilidad == null)
-            {
-                return NotFound();
-            }
-
-            _context.HabilidadCandidato.Remove(newCandidatoHabilidad);
-            await _context.SaveChangesAsync();
-
+            await _candidatohabilidadService.Delete(id_candidato, id_habilidad);
             return NoContent();
         }
     }
