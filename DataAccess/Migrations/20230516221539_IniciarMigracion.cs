@@ -5,7 +5,7 @@
 namespace DataAccess.Migrations
 {
     /// <inheritdoc />
-    public partial class inicialmigration : Migration
+    public partial class IniciarMigracion : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -16,12 +16,12 @@ namespace DataAccess.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
+                    ResumenPersonal = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Nombre = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Apellido1 = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Apellido2 = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    PrimerApellido = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    SegundoApellido = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Direccion = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Telefono = table.Column<int>(type: "int", nullable: false),
-                    ResumenPersonal = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                    Telefono = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -63,8 +63,8 @@ namespace DataAccess.Migrations
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Formacion = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Años_Estudio = table.Column<int>(type: "int", nullable: false),
-                    Fecha_Culminacion = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    AñosEstudio = table.Column<int>(type: "int", nullable: false),
+                    FechaFinalizacion = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     CandidatoId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>

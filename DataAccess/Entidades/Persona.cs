@@ -4,19 +4,17 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Services
+namespace DataAccess.Entidades
 {
-    public class CandidatoVm
+    public class Persona
+
     {
-        public int Id { get; set; }
+        // Clase padre que hereda atributos a la clase candidato
         public string Nombre { get; set; }
 
         public string PrimerApellido { get; set; }
         public string SegundoApellido { get; set; }
-
         public string Direccion { get; set; }
         public int Telefono { get; set; }
-        public string ResumenPersonal { get; set; }
-
     }
 }

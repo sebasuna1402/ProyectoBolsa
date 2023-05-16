@@ -6,15 +6,10 @@ using System.Threading.Tasks;
 
 namespace DataAccess.Entidades
 {
-    public class Candidato
+    public class Candidato : Persona
     {
         public int Id { get; set; }
-        public string Nombre { get; set; }
-
-        public string Apellido1 { get; set; }
-        public string Apellido2 { get; set; }
-        public string Direccion { get; set; }
-        public int Telefono { get; set; }
+      
         public string ResumenPersonal { get; set; }
 
         

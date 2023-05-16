@@ -34,8 +34,8 @@ namespace Services.Services
             newFormacion.Id = formacionRequest.Id;
             newFormacion.CandidatoId = formacionRequest.CandidatoId;
             newFormacion.Formacion = formacionRequest.Formacion;
-            newFormacion.Años_Estudio = formacionRequest.Años_Estudio;
-            newFormacion.Fecha_Culminacion = formacionRequest.Fecha_Culminacion;
+            newFormacion.AñosEstudio = formacionRequest.AñosEstudio;
+            newFormacion.FechaFinalizacion = formacionRequest.FechaFinalizacion;
 
             _context.FormacionAcademica.Add(newFormacion);
             await _context.SaveChangesAsync();
@@ -48,8 +48,8 @@ namespace Services.Services
             FormacionAcademica FormacionEdit = await _context.FormacionAcademica.FindAsync(id);
 
             FormacionEdit.Formacion = formacionRequest.Formacion;
-            FormacionEdit.Años_Estudio = formacionRequest.Años_Estudio;
-            FormacionEdit.Fecha_Culminacion = formacionRequest.Fecha_Culminacion;
+            FormacionEdit.AñosEstudio = formacionRequest.AñosEstudio;
+            FormacionEdit.FechaFinalizacion = formacionRequest.FechaFinalizacion;
 
             _context.Entry(FormacionEdit).State = EntityState.Modified;
 
