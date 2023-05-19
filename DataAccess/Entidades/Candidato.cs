@@ -14,7 +14,7 @@ namespace DataAccess.Entidades
 
         
         public List<FormacionAcademica> FormacionAcademicas { get; set; }
-        public List<HabilidadCandidato> HabilidadCandidatos { get; set; }
-        public List<OfertaCandidato> OfertaCandidatos { get; set; }
+        public List<EntradaHabilidadCa> HabilidadCandidatos { get; set; }
+        public List<EntradaOferCa> OfertaCandidatos { get; set; }
     }
 }

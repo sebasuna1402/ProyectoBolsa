@@ -11,24 +11,24 @@ using System.Threading.Tasks;
 
 namespace Services.Services
 {
-    internal class HabilidadCandidatoService : ICandidatoHabilidadService
+    internal class EntradaHabilidadCaService : IEntradaHabilidadCaService
     {
         private readonly MyApiContext _context;
 
-        public HabilidadCandidatoService(MyApiContext context)
+        public EntradaHabilidadCaService(MyApiContext context)
         {
             _context = context;
         }
 
-        public async Task<List<HabilidadCandidatoVm>> GetAll()
+        public async Task<List<EntradaHabilidadCaVm>> GetAll()
         {
-            List<HabilidadCandidato> listaCandidatoHabilidad = await _context.HabilidadCandidato.ToListAsync();
+            List<EntradaHabilidadCa> listaCandidatoHabilidad = await _context.HabilidadCandidato.ToListAsync();
 
-            List<HabilidadCandidatoVm> listaHabilidadVm = new List<HabilidadCandidatoVm>();
+            List<EntradaHabilidadCaVm> listaHabilidadVm = new List<EntradaHabilidadCaVm>();
 
-            foreach (HabilidadCandidato habilidadCandidato in listaCandidatoHabilidad)
+            foreach (EntradaHabilidadCa habilidadCandidato in listaCandidatoHabilidad)
             {
-                HabilidadCandidatoVm newCandidatoHabilidadVm = new HabilidadCandidatoVm();
+                EntradaHabilidadCaVm newCandidatoHabilidadVm = new EntradaHabilidadCaVm();
                 newCandidatoHabilidadVm.HabilidadId = habilidadCandidato.HabilidadId;
                 newCandidatoHabilidadVm.CandidatoId = habilidadCandidato.CandidatoId;
                 listaHabilidadVm.Add(newCandidatoHabilidadVm);
@@ -37,16 +37,16 @@ namespace Services.Services
             return listaHabilidadVm;
         }
 
-        public async Task<HabilidadCandidato> GetById(int id_candidato, int id_habilidad)
+        public async Task<EntradaHabilidadCa> GetById(int id_candidato, int id_habilidad)
         {
-            HabilidadCandidato newCandidatoHabilidad = new HabilidadCandidato();
+            EntradaHabilidadCa newCandidatoHabilidad = new EntradaHabilidadCa();
             newCandidatoHabilidad = _context.HabilidadCandidato.SingleOrDefault(pc => pc.CandidatoId == id_candidato && pc.HabilidadId == id_habilidad);
 
             return newCandidatoHabilidad;
         }
-        public async Task<HabilidadCandidato> Create(HabilidadCandidatoVm candidatohabilidadRequest)
+        public async Task<EntradaHabilidadCa> Create(EntradaHabilidadCaVm candidatohabilidadRequest)
         {
-            HabilidadCandidato newCandidatoHabilidad = new HabilidadCandidato();
+            EntradaHabilidadCa newCandidatoHabilidad = new EntradaHabilidadCa();
             newCandidatoHabilidad.CandidatoId = candidatohabilidadRequest.CandidatoId;
             newCandidatoHabilidad.HabilidadId = candidatohabilidadRequest.HabilidadId;
 
@@ -64,7 +64,7 @@ namespace Services.Services
         public async Task Delete(int id_candidato, int id_habilidad) 
         {
     
-            HabilidadCandidato newCandidatoHabilidad = new HabilidadCandidato();
+            EntradaHabilidadCa newCandidatoHabilidad = new EntradaHabilidadCa();
             newCandidatoHabilidad = _context.HabilidadCandidato.SingleOrDefault(pc => pc.CandidatoId == id_candidato && pc.HabilidadId == id_habilidad);
 
             _context.HabilidadCandidato.Remove(newCandidatoHabilidad);

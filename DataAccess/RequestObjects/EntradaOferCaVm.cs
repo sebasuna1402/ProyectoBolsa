@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 
 namespace Services
 {
-    public class HabilidadOfertaVm
+    public class EntradaOferCaVm
     {
+        public int CandidatoId { get; set; }
         public int OfertaId { get; set; }
-        public int HabilidadId { get; set; }
     }
 }

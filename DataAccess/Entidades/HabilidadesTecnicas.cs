@@ -14,8 +14,8 @@ namespace DataAccess.Entidades
 
         //listas
 
-        public List<HabilidadCandidato> HabilidadCandidatos{ get; set; }
-        public List<HabilidadOferta> HabilidadOfertas { get; set; }
+        public List<EntradaHabilidadCa> HabilidadCandidatos{ get; set; }
+        public List<EntradaOfeHab> HabilidadOfertas { get; set; }
 
     }
 }

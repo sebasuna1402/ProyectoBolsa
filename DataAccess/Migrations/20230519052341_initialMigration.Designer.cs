@@ -11,8 +11,8 @@ using ProyectoBolsa.Data;
 namespace DataAccess.Migrations
 {
     [DbContext(typeof(MyApiContext))]
-    [Migration("20230516221539_IniciarMigracion")]
-    partial class IniciarMigracion
+    [Migration("20230519052341_initialMigration")]
+    partial class initialMigration
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -84,6 +84,49 @@ namespace DataAccess.Migrations
                     b.ToTable("Empresa");
                 });
 
+            modelBuilder.Entity("DataAccess.Entidades.EntradaHabilidadCa", b =>
+                {
+                    b.Property<int>("CandidatoId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("HabilidadId")
+                        .HasColumnType("int");
+
+                    b.HasKey("CandidatoId", "HabilidadId");
+
+                    b.HasIndex("HabilidadId");
+
+                    b.ToTable("HabilidadCandidato");
+                });
+
+            modelBuilder.Entity("DataAccess.Entidades.EntradaOfeHab", b =>
+                {
+                    b.Property<int>("OfertaId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("HabilidadId")
+                        .HasColumnType("int");
+
+                    b.HasKey("OfertaId", "HabilidadId");
+
+                    b.HasIndex("HabilidadId");
+
+                    b.ToTable("HabilidadOferta");
+                });
+
+            modelBuilder.Entity("DataAccess.Entidades.EntradaOferCa", b =>
+                {
+                    b.Property<int>("CandidatoId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("OfertaId")
+                        .HasColumnType("int");
+
+                    b.HasKey("CandidatoId", "OfertaId");
+
+                    b.ToTable("OfertaCandidato");
+                });
+
             modelBuilder.Entity("DataAccess.Entidades.FormacionAcademica", b =>
                 {
                     b.Property<int>("Id")
@@ -111,36 +154,6 @@ namespace DataAccess.Migrations
                     b.HasIndex("CandidatoId");
 
                     b.ToTable("FormacionAcademica");
-                });
-
-            modelBuilder.Entity("DataAccess.Entidades.HabilidadCandidato", b =>
-                {
-                    b.Property<int>("CandidatoId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("HabilidadId")
-                        .HasColumnType("int");
-
-                    b.HasKey("CandidatoId", "HabilidadId");
-
-                    b.HasIndex("HabilidadId");
-
-                    b.ToTable("HabilidadCandidato");
-                });
-
-            modelBuilder.Entity("DataAccess.Entidades.HabilidadOferta", b =>
-                {
-                    b.Property<int>("OfertaId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("HabilidadId")
-                        .HasColumnType("int");
-
-                    b.HasKey("OfertaId", "HabilidadId");
-
-                    b.HasIndex("HabilidadId");
-
-                    b.ToTable("HabilidadOferta");
                 });
 
             modelBuilder.Entity("DataAccess.Entidades.HabilidadesTecnicas", b =>
@@ -182,31 +195,7 @@ namespace DataAccess.Migrations
                     b.ToTable("Oferta");
                 });
 
-            modelBuilder.Entity("DataAccess.Entidades.OfertaCandidato", b =>
-                {
-                    b.Property<int>("CandidatoId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("OfertaId")
-                        .HasColumnType("int");
-
-                    b.HasKey("CandidatoId", "OfertaId");
-
-                    b.ToTable("OfertaCandidato");
-                });
-
-            modelBuilder.Entity("DataAccess.Entidades.FormacionAcademica", b =>
-                {
-                    b.HasOne("DataAccess.Entidades.Candidato", "Candidato")
-                        .WithMany("FormacionAcademicas")
-                        .HasForeignKey("CandidatoId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Candidato");
-                });
-
-            modelBuilder.Entity("DataAccess.Entidades.HabilidadCandidato", b =>
+            modelBuilder.Entity("DataAccess.Entidades.EntradaHabilidadCa", b =>
                 {
                     b.HasOne("DataAccess.Entidades.Candidato", "Candidato")
                         .WithMany("HabilidadCandidatos")
@@ -225,7 +214,7 @@ namespace DataAccess.Migrations
                     b.Navigation("HabilidadesTecnicas");
                 });
 
-            modelBuilder.Entity("DataAccess.Entidades.HabilidadOferta", b =>
+            modelBuilder.Entity("DataAccess.Entidades.EntradaOfeHab", b =>
                 {
                     b.HasOne("DataAccess.Entidades.HabilidadesTecnicas", "HabilidadesTecnicas")
                         .WithMany("HabilidadOfertas")
@@ -244,18 +233,7 @@ namespace DataAccess.Migrations
                     b.Navigation("Oferta");
                 });
 
-            modelBuilder.Entity("DataAccess.Entidades.Oferta", b =>
-                {
-                    b.HasOne("DataAccess.Entidades.Empresa", "Empresa")
-                        .WithMany("ofertas")
-                        .HasForeignKey("EmpresaId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Empresa");
-                });
-
-            modelBuilder.Entity("DataAccess.Entidades.OfertaCandidato", b =>
+            modelBuilder.Entity("DataAccess.Entidades.EntradaOferCa", b =>
                 {
                     b.HasOne("DataAccess.Entidades.Candidato", "Candidato")
                         .WithMany("OfertaCandidatos")
@@ -272,6 +250,28 @@ namespace DataAccess.Migrations
                     b.Navigation("Candidato");
 
                     b.Navigation("Oferta");
+                });
+
+            modelBuilder.Entity("DataAccess.Entidades.FormacionAcademica", b =>
+                {
+                    b.HasOne("DataAccess.Entidades.Candidato", "Candidato")
+                        .WithMany("FormacionAcademicas")
+                        .HasForeignKey("CandidatoId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Candidato");
+                });
+
+            modelBuilder.Entity("DataAccess.Entidades.Oferta", b =>
+                {
+                    b.HasOne("DataAccess.Entidades.Empresa", "Empresa")
+                        .WithMany("ofertas")
+                        .HasForeignKey("EmpresaId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Empresa");
                 });
 
             modelBuilder.Entity("DataAccess.Entidades.Candidato", b =>

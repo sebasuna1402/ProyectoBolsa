@@ -7,24 +7,24 @@ using Services.IServices;
 
 namespace Services.Services
 {
-    public class CandidatoOfertaService : ICandidatoOfertaService
+    public class EntradaOferCaService : IEntradaOferCaService
     {
         private readonly MyApiContext _context;
 
-        public CandidatoOfertaService(MyApiContext context)
+        public EntradaOferCaService(MyApiContext context)
         {
             _context = context;
         }
-        public async Task<List<OfertaCandidatoVm>> GetAll()
+        public async Task<List<EntradaOferCaVm>> GetAll()
         {
 
-            List<OfertaCandidato> listaCandidatoOferta = await _context.OfertaCandidato.ToListAsync();
+            List<EntradaOferCa> listaCandidatoOferta = await _context.OfertaCandidato.ToListAsync();
 
-            List<OfertaCandidatoVm> listaCandidatoOfertaVm = new List<OfertaCandidatoVm>();
+            List<EntradaOferCaVm> listaCandidatoOfertaVm = new List<EntradaOferCaVm>();
 
-            foreach (OfertaCandidato candidatoOferta in listaCandidatoOferta)
+            foreach (EntradaOferCa candidatoOferta in listaCandidatoOferta)
             {
-                OfertaCandidatoVm newCandidatoOfertaVm = new OfertaCandidatoVm();
+                EntradaOferCaVm newCandidatoOfertaVm = new EntradaOferCaVm();
                 newCandidatoOfertaVm.CandidatoId = candidatoOferta.CandidatoId;
                 newCandidatoOfertaVm.OfertaId = candidatoOferta.OfertaId;
                 listaCandidatoOfertaVm.Add(newCandidatoOfertaVm);
@@ -33,17 +33,17 @@ namespace Services.Services
             return listaCandidatoOfertaVm;
         }
 
-        public async Task<OfertaCandidato> GetById(int id_candidato, int id_oferta)
+        public async Task<EntradaOferCa> GetById(int id_candidato, int id_oferta)
         {
-            OfertaCandidato newOfertaCandidato = new OfertaCandidato();
+            EntradaOferCa newOfertaCandidato = new EntradaOferCa();
             newOfertaCandidato = _context.OfertaCandidato.SingleOrDefault(pc => pc.CandidatoId == id_candidato && pc.OfertaId == id_oferta);
 
             return newOfertaCandidato;
         }
 
-        public async Task<OfertaCandidato> Create(OfertaCandidatoVm ofertacandidatoRequest)
+        public async Task<EntradaOferCa> Create(EntradaOferCaVm ofertacandidatoRequest)
         {
-            OfertaCandidato newOfertaCandidato = new OfertaCandidato();
+            EntradaOferCa newOfertaCandidato = new EntradaOferCa();
             newOfertaCandidato.CandidatoId = ofertacandidatoRequest.CandidatoId;
             newOfertaCandidato.OfertaId = ofertacandidatoRequest.OfertaId;
 
@@ -59,7 +59,7 @@ namespace Services.Services
         public async Task Delete(int id_candidato, int id_oferta)
         {
 
-            OfertaCandidato newOfertaCandidato = new OfertaCandidato();
+            EntradaOferCa newOfertaCandidato = new EntradaOferCa();
             newOfertaCandidato = _context.OfertaCandidato.SingleOrDefault(pc => pc.CandidatoId == id_candidato && pc.OfertaId == id_oferta);
 
             _context.OfertaCandidato.Remove(newOfertaCandidato);

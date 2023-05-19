@@ -22,14 +22,16 @@ namespace ProyectoBolsa.Data
 
         // Relaciones de muchos a muchos
 
-        public DbSet<HabilidadCandidato> HabilidadCandidato { get; set; } = default!;
-        public DbSet<HabilidadOferta> HabilidadOferta { get; set; } = default!;
-        public DbSet<OfertaCandidato> OfertaCandidato { get; set; } = default!;
+        public DbSet<EntradaHabilidadCa> HabilidadCandidato { get; set; } = default!;
+        public DbSet<EntradaOfeHab> HabilidadOferta { get; set; } = default!;
+        public DbSet<EntradaOferCa> OfertaCandidato { get; set; } = default!;
 
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            // uno a muchos
+            // RELACIONES 
+
+            // 1-PRIMERA RELACION UNO A MUCHOS REVISAR
 
             modelBuilder.Entity<FormacionAcademica>()
             .HasOne(formacion => formacion.Candidato)
@@ -42,49 +44,50 @@ namespace ProyectoBolsa.Data
             .HasForeignKey(k => k.EmpresaId);
 
 
-            // muchos a muchos
+           // 2- SEGUNDA RELACION MUCHOS A MUCHOS
 
-            // CandidatoHabilidad
+            // EntradaHabilidadCa
 
-            modelBuilder.Entity<HabilidadCandidato>()
+
+            modelBuilder.Entity<EntradaHabilidadCa>()
             .HasKey(ch => new { ch.CandidatoId, ch.HabilidadId });
 
-            modelBuilder.Entity<HabilidadCandidato>()
+            modelBuilder.Entity<EntradaHabilidadCa>()
                 .HasOne(ch => ch.Candidato)
                 .WithMany(c => c.HabilidadCandidatos)
                 .HasForeignKey(ch => ch.CandidatoId);
 
-            modelBuilder.Entity<HabilidadCandidato>()
+            modelBuilder.Entity<EntradaHabilidadCa>()
                 .HasOne(ch => ch.HabilidadesTecnicas)
                 .WithMany(h => h.HabilidadCandidatos)
                 .HasForeignKey(ch => ch.HabilidadId);
 
-            // OfertaHabilidad
+            // EntradaOfeHab
 
-            modelBuilder.Entity<HabilidadOferta>()
+            modelBuilder.Entity<EntradaOfeHab>()
             .HasKey(ch => new { ch.OfertaId, ch.HabilidadId });
 
-            modelBuilder.Entity<HabilidadOferta>()
+            modelBuilder.Entity<EntradaOfeHab>()
                 .HasOne(ch => ch.Oferta)
                 .WithMany(c => c.HabilidadOfertas)
                 .HasForeignKey(ch => ch.OfertaId);
 
-            modelBuilder.Entity<HabilidadOferta>()
+            modelBuilder.Entity<EntradaOfeHab>()
                 .HasOne(ch => ch.HabilidadesTecnicas)
                 .WithMany(h => h.HabilidadOfertas)
                 .HasForeignKey(ch => ch.HabilidadId);
 
-            // CandidatoOferta
+            // EntradaOferCa
 
-            modelBuilder.Entity<OfertaCandidato>()
+            modelBuilder.Entity<EntradaOferCa>()
             .HasKey(ch => new { ch.CandidatoId, ch.OfertaId });
 
-            modelBuilder.Entity<OfertaCandidato>()
+            modelBuilder.Entity<EntradaOferCa>()
                 .HasOne(ch => ch.Candidato)
                 .WithMany(c => c.OfertaCandidatos)
                 .HasForeignKey(ch => ch.CandidatoId);
 
-            modelBuilder.Entity<OfertaCandidato>()
+            modelBuilder.Entity<EntradaOferCa>()
                 .HasOne(ch => ch.Oferta)
                 .WithMany(h => h.OfertaCandidatos)
                 .HasForeignKey(ch => ch.CandidatoId);

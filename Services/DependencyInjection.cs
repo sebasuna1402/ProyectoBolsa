@@ -16,12 +16,12 @@ namespace Services
         {
             services.AddScoped<ICandidatoService, CandidatoService>();//revisado
            
-            services.AddScoped<ICandidatoHabilidadService, HabilidadCandidatoService>();//revisado
+            services.AddScoped<IEntradaHabilidadCaService, EntradaHabilidadCaService>();//revisado
             
-            services.AddScoped<ICandidatoOfertaService, CandidatoOfertaService>();//revisado
+            services.AddScoped<IEntradaOferCaService, EntradaOferCaService>();//revisado
 
 
-            services.AddScoped<IOfertaHabilidadService, OfertaHabilidadService>();//revisado
+            services.AddScoped<IEntradaOfeHabService, EntradaOfeHabService>();//revisado
           
             services.AddScoped<IHabilidadService, HabilidadService>();// revisado
            

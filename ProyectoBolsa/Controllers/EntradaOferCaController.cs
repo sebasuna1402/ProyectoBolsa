@@ -12,20 +12,20 @@ namespace ProyectoBolsa.Controllers
 
     [Route("api/[controller]")]
     [ApiController]
-    public class CandidatoOfertaController : Controller
+    public class EntradaOferCaController : Controller
     {
 
-        private readonly ICandidatoOfertaService _candidatoofertaService;
+        private readonly IEntradaOferCaService _candidatoofertaService;
 
-        public CandidatoOfertaController(ICandidatoOfertaService candidatoofertaService)
+        public EntradaOferCaController(IEntradaOferCaService candidatoofertaService)
         {
             _candidatoofertaService = candidatoofertaService;
         }
 
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<OfertaCandidatoVm>>> GetCandidatoOferta()
+        public async Task<ActionResult<IEnumerable<EntradaOferCaVm>>> GetCandidatoOferta()
         {
-            List<OfertaCandidatoVm> listCandidatoofertaVm = await _candidatoofertaService.GetAll();
+            List<EntradaOferCaVm> listCandidatoofertaVm = await _candidatoofertaService.GetAll();
 
             if (listCandidatoofertaVm == null)
             {
@@ -36,14 +36,14 @@ namespace ProyectoBolsa.Controllers
         }
 
         [HttpPost]
-        public async Task<ActionResult<OfertaCandidato>> PostCandidatoOferta(OfertaCandidatoVm candidatoofertaRequest)
+        public async Task<ActionResult<EntradaOferCa>> PostCandidatoOferta(EntradaOferCaVm candidatoofertaRequest)
         {
             if (candidatoofertaRequest == null)
             {
                 return BadRequest();
             }
 
-            OfertaCandidato newCandidatoOferta = await _candidatoofertaService.Create(candidatoofertaRequest);
+            EntradaOferCa newCandidatoOferta = await _candidatoofertaService.Create(candidatoofertaRequest);
 
             return CreatedAtAction("GetCandidatoOferta", new { id = newCandidatoOferta.CandidatoId }, newCandidatoOferta);
 

@@ -6,11 +6,13 @@ using System.Threading.Tasks;
 
 namespace DataAccess.Entidades
 {
-    public class HabilidadOferta
+    public class EntradaHabilidadCa
     {
-        public int OfertaId { get; set; }
-        public Oferta Oferta { get; set; }
+        public int CandidatoId { get; set; }
+        public Candidato Candidato { get; set; }
         public int HabilidadId { get; set; }
+
+
         public HabilidadesTecnicas HabilidadesTecnicas { get; set; }
     }
 }

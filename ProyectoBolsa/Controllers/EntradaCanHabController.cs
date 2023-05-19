@@ -10,20 +10,20 @@ namespace ProyectoBolsa.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class CandidatoHabilidadController : Controller
+    public class EntradaCanHabController : Controller
     {
-        private readonly ICandidatoHabilidadService _candidatohabilidadService;
+        private readonly IEntradaHabilidadCaService _candidatohabilidadService;
 
-        public CandidatoHabilidadController(ICandidatoHabilidadService candidatohabilidadService)
+        public EntradaCanHabController(IEntradaHabilidadCaService candidatohabilidadService)
         {
             _candidatohabilidadService = candidatohabilidadService;
         }
 
 
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<HabilidadCandidatoVm>>> GetCandidatoHabilidad()
+        public async Task<ActionResult<IEnumerable<EntradaHabilidadCaVm>>> GetCandidatoHabilidad()
         {
-            List<HabilidadCandidatoVm> listCandidatoHabilidadVm = await _candidatohabilidadService.GetAll();
+            List<EntradaHabilidadCaVm> listCandidatoHabilidadVm = await _candidatohabilidadService.GetAll();
 
             if (listCandidatoHabilidadVm == null)
             {
@@ -34,14 +34,14 @@ namespace ProyectoBolsa.Controllers
         }
 
         [HttpPost]
-        public async Task<ActionResult<HabilidadCandidato>> PostCandidatoHabilidad(HabilidadCandidatoVm candidatohabilidadRequest)
+        public async Task<ActionResult<EntradaHabilidadCa>> PostCandidatoHabilidad(EntradaHabilidadCaVm candidatohabilidadRequest)
         {
             if (candidatohabilidadRequest == null)
             {
                 return BadRequest();
             }
 
-            HabilidadCandidato newCandidatoHabilidad = await _candidatohabilidadService.Create(candidatohabilidadRequest);
+            EntradaHabilidadCa newCandidatoHabilidad = await _candidatohabilidadService.Create(candidatohabilidadRequest);
 
             return CreatedAtAction("GetCandidatoHabilidad", new { id = newCandidatoHabilidad.CandidatoId }, newCandidatoHabilidad);
         }

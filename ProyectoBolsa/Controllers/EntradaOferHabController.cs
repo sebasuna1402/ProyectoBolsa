@@ -10,19 +10,19 @@ namespace ProyectoBolsa.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class OfertaHabilidadController : Controller
+    public class EntradaOferHabController : Controller
     {
-        private readonly IOfertaHabilidadService _candidatohabilidadService;
+        private readonly IEntradaOfeHabService _candidatohabilidadService;
 
-        public OfertaHabilidadController(IOfertaHabilidadService candidatohabilidadService)
+        public EntradaOferHabController(IEntradaOfeHabService candidatohabilidadService)
         {
             _candidatohabilidadService = candidatohabilidadService;
         }
 
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<HabilidadOfertaVm>>> GetOfertaHabilidad()
+        public async Task<ActionResult<IEnumerable<EntradaOfeHabVm>>> GetOfertaHabilidad()
         {
-            List<HabilidadOfertaVm> listOfertaHabilidadVm = await _candidatohabilidadService.GetAll();
+            List<EntradaOfeHabVm> listOfertaHabilidadVm = await _candidatohabilidadService.GetAll();
 
             if (listOfertaHabilidadVm == null)
             {
@@ -33,14 +33,14 @@ namespace ProyectoBolsa.Controllers
         }
 
         [HttpPost]
-        public async Task<ActionResult<HabilidadOferta>> PostOfertaHabilidad(HabilidadOfertaVm ofertahabilidadRequest)
+        public async Task<ActionResult<EntradaOfeHab>> PostOfertaHabilidad(EntradaOfeHabVm ofertahabilidadRequest)
         {
             if (ofertahabilidadRequest == null)
             {
                 return BadRequest();
             }
 
-            HabilidadOferta newOfertaHabilidad = await _candidatohabilidadService.Create(ofertahabilidadRequest);
+            EntradaOfeHab newOfertaHabilidad = await _candidatohabilidadService.Create(ofertahabilidadRequest);
 
             return CreatedAtAction("GetOfertaHabilidad", new { id = newOfertaHabilidad.OfertaId }, newOfertaHabilidad);
         }
