@@ -5,7 +5,7 @@
 namespace DataAccess.Migrations
 {
     /// <inheritdoc />
-    public partial class initialMigration : Migration
+    public partial class initialmigration : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -99,7 +99,7 @@ namespace DataAccess.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "HabilidadCandidato",
+                name: "EntradaHabilidadCa",
                 columns: table => new
                 {
                     CandidatoId = table.Column<int>(type: "int", nullable: false),
@@ -107,15 +107,15 @@ namespace DataAccess.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_HabilidadCandidato", x => new { x.CandidatoId, x.HabilidadId });
+                    table.PrimaryKey("PK_EntradaHabilidadCa", x => new { x.CandidatoId, x.HabilidadId });
                     table.ForeignKey(
-                        name: "FK_HabilidadCandidato_Candidato_CandidatoId",
+                        name: "FK_EntradaHabilidadCa_Candidato_CandidatoId",
                         column: x => x.CandidatoId,
                         principalTable: "Candidato",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_HabilidadCandidato_HabilidadesTecnicas_HabilidadId",
+                        name: "FK_EntradaHabilidadCa_HabilidadesTecnicas_HabilidadId",
                         column: x => x.HabilidadId,
                         principalTable: "HabilidadesTecnicas",
                         principalColumn: "Id",
@@ -123,7 +123,7 @@ namespace DataAccess.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "HabilidadOferta",
+                name: "EntradaOfeHab",
                 columns: table => new
                 {
                     OfertaId = table.Column<int>(type: "int", nullable: false),
@@ -131,15 +131,15 @@ namespace DataAccess.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_HabilidadOferta", x => new { x.OfertaId, x.HabilidadId });
+                    table.PrimaryKey("PK_EntradaOfeHab", x => new { x.OfertaId, x.HabilidadId });
                     table.ForeignKey(
-                        name: "FK_HabilidadOferta_HabilidadesTecnicas_HabilidadId",
+                        name: "FK_EntradaOfeHab_HabilidadesTecnicas_HabilidadId",
                         column: x => x.HabilidadId,
                         principalTable: "HabilidadesTecnicas",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_HabilidadOferta_Oferta_OfertaId",
+                        name: "FK_EntradaOfeHab_Oferta_OfertaId",
                         column: x => x.OfertaId,
                         principalTable: "Oferta",
                         principalColumn: "Id",
@@ -147,7 +147,7 @@ namespace DataAccess.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "OfertaCandidato",
+                name: "EntradaOferCa",
                 columns: table => new
                 {
                     CandidatoId = table.Column<int>(type: "int", nullable: false),
@@ -155,15 +155,15 @@ namespace DataAccess.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_OfertaCandidato", x => new { x.CandidatoId, x.OfertaId });
+                    table.PrimaryKey("PK_EntradaOferCa", x => new { x.CandidatoId, x.OfertaId });
                     table.ForeignKey(
-                        name: "FK_OfertaCandidato_Candidato_CandidatoId",
+                        name: "FK_EntradaOferCa_Candidato_CandidatoId",
                         column: x => x.CandidatoId,
                         principalTable: "Candidato",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_OfertaCandidato_Oferta_CandidatoId",
+                        name: "FK_EntradaOferCa_Oferta_CandidatoId",
                         column: x => x.CandidatoId,
                         principalTable: "Oferta",
                         principalColumn: "Id",
@@ -171,19 +171,19 @@ namespace DataAccess.Migrations
                 });
 
             migrationBuilder.CreateIndex(
+                name: "IX_EntradaHabilidadCa_HabilidadId",
+                table: "EntradaHabilidadCa",
+                column: "HabilidadId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_EntradaOfeHab_HabilidadId",
+                table: "EntradaOfeHab",
+                column: "HabilidadId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_FormacionAcademica_CandidatoId",
                 table: "FormacionAcademica",
                 column: "CandidatoId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_HabilidadCandidato_HabilidadId",
-                table: "HabilidadCandidato",
-                column: "HabilidadId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_HabilidadOferta_HabilidadId",
-                table: "HabilidadOferta",
-                column: "HabilidadId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Oferta_EmpresaId",
@@ -195,25 +195,25 @@ namespace DataAccess.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
+                name: "EntradaHabilidadCa");
+
+            migrationBuilder.DropTable(
+                name: "EntradaOfeHab");
+
+            migrationBuilder.DropTable(
+                name: "EntradaOferCa");
+
+            migrationBuilder.DropTable(
                 name: "FormacionAcademica");
-
-            migrationBuilder.DropTable(
-                name: "HabilidadCandidato");
-
-            migrationBuilder.DropTable(
-                name: "HabilidadOferta");
-
-            migrationBuilder.DropTable(
-                name: "OfertaCandidato");
 
             migrationBuilder.DropTable(
                 name: "HabilidadesTecnicas");
 
             migrationBuilder.DropTable(
-                name: "Candidato");
+                name: "Oferta");
 
             migrationBuilder.DropTable(
-                name: "Oferta");
+                name: "Candidato");
 
             migrationBuilder.DropTable(
                 name: "Empresa");

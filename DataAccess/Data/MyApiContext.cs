@@ -22,9 +22,9 @@ namespace ProyectoBolsa.Data
 
         // Relaciones de muchos a muchos
 
-        public DbSet<EntradaHabilidadCa> HabilidadCandidato { get; set; } = default!;
-        public DbSet<EntradaOfeHab> HabilidadOferta { get; set; } = default!;
-        public DbSet<EntradaOferCa> OfertaCandidato { get; set; } = default!;
+        public DbSet<EntradaHabilidadCa> EntradaHabilidadCa { get; set; } = default!;
+        public DbSet<EntradaOfeHab> EntradaOfeHab { get; set; } = default!;
+        public DbSet<EntradaOferCa> EntradaOferCa { get; set; } = default!;
 
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)

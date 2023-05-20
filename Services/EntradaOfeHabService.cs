@@ -23,7 +23,7 @@ namespace Services.Services
         public async Task<List<EntradaOfeHabVm>> GetAll()
         {
 
-            List<EntradaOfeHab> listaOfertaHabilidad = await _context.HabilidadOferta.ToListAsync();
+            List<EntradaOfeHab> listaOfertaHabilidad = await _context.EntradaOfeHab.ToListAsync();
 
             List<EntradaOfeHabVm> listaOfertaHabilidadVm = new List<EntradaOfeHabVm>();
 
@@ -41,7 +41,7 @@ namespace Services.Services
         public async Task<EntradaOfeHab> GetById(int id_oferta, int id_habilidad)
         {
             EntradaOfeHab newOfertaHabilidad = new EntradaOfeHab();
-            newOfertaHabilidad = _context.HabilidadOferta.SingleOrDefault(pc => pc.OfertaId == id_oferta && pc.HabilidadId == id_habilidad);
+            newOfertaHabilidad = _context.EntradaOfeHab.SingleOrDefault(pc => pc.OfertaId == id_oferta && pc.HabilidadId == id_habilidad);
 
             return newOfertaHabilidad;
         }
@@ -54,7 +54,7 @@ namespace Services.Services
 
        
 
-            _context.HabilidadOferta.Add(newOfertaHabilidad);
+            _context.EntradaOfeHab.Add(newOfertaHabilidad);
             await _context.SaveChangesAsync();
 
             return newOfertaHabilidad;
@@ -65,9 +65,9 @@ namespace Services.Services
         {        
 
             EntradaOfeHab newOfertaHabilidad = new EntradaOfeHab();
-            newOfertaHabilidad = _context.HabilidadOferta.SingleOrDefault(pc => pc.OfertaId == id_oferta && pc.HabilidadId == id_habilidad);         
+            newOfertaHabilidad = _context.EntradaOfeHab.SingleOrDefault(pc => pc.OfertaId == id_oferta && pc.HabilidadId == id_habilidad);         
 
-            _context.HabilidadOferta.Remove(newOfertaHabilidad);
+            _context.EntradaOfeHab.Remove(newOfertaHabilidad);
             await _context.SaveChangesAsync();
         }
 

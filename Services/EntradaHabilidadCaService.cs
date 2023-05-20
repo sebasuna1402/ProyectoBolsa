@@ -22,7 +22,7 @@ namespace Services.Services
 
         public async Task<List<EntradaHabilidadCaVm>> GetAll()
         {
-            List<EntradaHabilidadCa> listaCandidatoHabilidad = await _context.HabilidadCandidato.ToListAsync();
+            List<EntradaHabilidadCa> listaCandidatoHabilidad = await _context.EntradaHabilidadCa.ToListAsync();
 
             List<EntradaHabilidadCaVm> listaHabilidadVm = new List<EntradaHabilidadCaVm>();
 
@@ -40,7 +40,7 @@ namespace Services.Services
         public async Task<EntradaHabilidadCa> GetById(int id_candidato, int id_habilidad)
         {
             EntradaHabilidadCa newCandidatoHabilidad = new EntradaHabilidadCa();
-            newCandidatoHabilidad = _context.HabilidadCandidato.SingleOrDefault(pc => pc.CandidatoId == id_candidato && pc.HabilidadId == id_habilidad);
+            newCandidatoHabilidad = _context.EntradaHabilidadCa.SingleOrDefault(pc => pc.CandidatoId == id_candidato && pc.HabilidadId == id_habilidad);
 
             return newCandidatoHabilidad;
         }
@@ -55,7 +55,7 @@ namespace Services.Services
             //   return Problem("Entity set 'MyApiContext.CandidatoHabilidad'  is null.");
             //}
 
-            _context.HabilidadCandidato.Add(newCandidatoHabilidad);
+            _context.EntradaHabilidadCa.Add(newCandidatoHabilidad);
             await _context.SaveChangesAsync();
 
             return newCandidatoHabilidad;
@@ -65,9 +65,9 @@ namespace Services.Services
         {
     
             EntradaHabilidadCa newCandidatoHabilidad = new EntradaHabilidadCa();
-            newCandidatoHabilidad = _context.HabilidadCandidato.SingleOrDefault(pc => pc.CandidatoId == id_candidato && pc.HabilidadId == id_habilidad);
+            newCandidatoHabilidad = _context.EntradaHabilidadCa.SingleOrDefault(pc => pc.CandidatoId == id_candidato && pc.HabilidadId == id_habilidad);
 
-            _context.HabilidadCandidato.Remove(newCandidatoHabilidad);
+            _context.EntradaHabilidadCa.Remove(newCandidatoHabilidad);
             await _context.SaveChangesAsync();
 
         }

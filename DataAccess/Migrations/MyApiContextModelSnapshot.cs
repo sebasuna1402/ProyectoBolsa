@@ -93,7 +93,7 @@ namespace DataAccess.Migrations
 
                     b.HasIndex("HabilidadId");
 
-                    b.ToTable("HabilidadCandidato");
+                    b.ToTable("EntradaHabilidadCa");
                 });
 
             modelBuilder.Entity("DataAccess.Entidades.EntradaOfeHab", b =>
@@ -108,7 +108,7 @@ namespace DataAccess.Migrations
 
                     b.HasIndex("HabilidadId");
 
-                    b.ToTable("HabilidadOferta");
+                    b.ToTable("EntradaOfeHab");
                 });
 
             modelBuilder.Entity("DataAccess.Entidades.EntradaOferCa", b =>
@@ -121,7 +121,7 @@ namespace DataAccess.Migrations
 
                     b.HasKey("CandidatoId", "OfertaId");
 
-                    b.ToTable("OfertaCandidato");
+                    b.ToTable("EntradaOferCa");
                 });
 
             modelBuilder.Entity("DataAccess.Entidades.FormacionAcademica", b =>
@@ -195,13 +195,13 @@ namespace DataAccess.Migrations
             modelBuilder.Entity("DataAccess.Entidades.EntradaHabilidadCa", b =>
                 {
                     b.HasOne("DataAccess.Entidades.Candidato", "Candidato")
-                        .WithMany("HabilidadCandidatos")
+                        .WithMany("EntradaHabilidadCa")
                         .HasForeignKey("CandidatoId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.HasOne("DataAccess.Entidades.HabilidadesTecnicas", "HabilidadesTecnicas")
-                        .WithMany("HabilidadCandidatos")
+                        .WithMany("EntradaHabilidadCa")
                         .HasForeignKey("HabilidadId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -214,13 +214,13 @@ namespace DataAccess.Migrations
             modelBuilder.Entity("DataAccess.Entidades.EntradaOfeHab", b =>
                 {
                     b.HasOne("DataAccess.Entidades.HabilidadesTecnicas", "HabilidadesTecnicas")
-                        .WithMany("HabilidadOfertas")
+                        .WithMany("EntradaOfeHab")
                         .HasForeignKey("HabilidadId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.HasOne("DataAccess.Entidades.Oferta", "Oferta")
-                        .WithMany("HabilidadOfertas")
+                        .WithMany("EntradaOfeHab")
                         .HasForeignKey("OfertaId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -233,13 +233,13 @@ namespace DataAccess.Migrations
             modelBuilder.Entity("DataAccess.Entidades.EntradaOferCa", b =>
                 {
                     b.HasOne("DataAccess.Entidades.Candidato", "Candidato")
-                        .WithMany("OfertaCandidatos")
+                        .WithMany("EntradaOferCa")
                         .HasForeignKey("CandidatoId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.HasOne("DataAccess.Entidades.Oferta", "Oferta")
-                        .WithMany("OfertaCandidatos")
+                        .WithMany("EntradaOferCa")
                         .HasForeignKey("CandidatoId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -252,7 +252,7 @@ namespace DataAccess.Migrations
             modelBuilder.Entity("DataAccess.Entidades.FormacionAcademica", b =>
                 {
                     b.HasOne("DataAccess.Entidades.Candidato", "Candidato")
-                        .WithMany("FormacionAcademicas")
+                        .WithMany("FormacionAcads")
                         .HasForeignKey("CandidatoId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -273,11 +273,11 @@ namespace DataAccess.Migrations
 
             modelBuilder.Entity("DataAccess.Entidades.Candidato", b =>
                 {
-                    b.Navigation("FormacionAcademicas");
+                    b.Navigation("EntradaHabilidadCa");
 
-                    b.Navigation("HabilidadCandidatos");
+                    b.Navigation("EntradaOferCa");
 
-                    b.Navigation("OfertaCandidatos");
+                    b.Navigation("FormacionAcads");
                 });
 
             modelBuilder.Entity("DataAccess.Entidades.Empresa", b =>
@@ -287,16 +287,16 @@ namespace DataAccess.Migrations
 
             modelBuilder.Entity("DataAccess.Entidades.HabilidadesTecnicas", b =>
                 {
-                    b.Navigation("HabilidadCandidatos");
+                    b.Navigation("EntradaHabilidadCa");
 
-                    b.Navigation("HabilidadOfertas");
+                    b.Navigation("EntradaOfeHab");
                 });
 
             modelBuilder.Entity("DataAccess.Entidades.Oferta", b =>
                 {
-                    b.Navigation("HabilidadOfertas");
+                    b.Navigation("EntradaOfeHab");
 
-                    b.Navigation("OfertaCandidatos");
+                    b.Navigation("EntradaOferCa");
                 });
 #pragma warning restore 612, 618
         }
