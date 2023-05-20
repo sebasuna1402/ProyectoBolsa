@@ -30,13 +30,11 @@ namespace Services.Services
                 Id = c.Id,
                 Descripcion = c.Descripcion,
                 EmpresaId = c.EmpresaId,
-                HabilidadOfertas = c.HabilidadOfertas,
-                OfertaCandidatos = c.OfertaCandidatos,
+                EntradaOfeHab = c.EntradaOfeHab,
+                EntradaOferCa = c.EntradaOferCa,
             })
                    .ToListAsync();
 
-
-            //reunirse con el profe para preguntarle como hacer bien el select column
 
             return listaOfertas;
         }

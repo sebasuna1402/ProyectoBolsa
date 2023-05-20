@@ -16,8 +16,8 @@ namespace DataAccess.Entidades
         public int EmpresaId { get; set; }
         public Empresa Empresa { get; set; }
 
-        public List<EntradaOfeHab> HabilidadOfertas { get; set; }
-        public List<EntradaOferCa> OfertaCandidatos { get; set; }
+        public List<EntradaOfeHab> EntradaOfeHab { get; set; }
+        public List<EntradaOferCa> EntradaOferCa { get; set; }
 
     }
 }

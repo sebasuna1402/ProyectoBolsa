@@ -36,8 +36,8 @@ namespace Services.Services
                 ofertas = c.ofertas.Select(f => new Oferta
                 {
                     Descripcion = f.Descripcion,
-                    HabilidadOfertas = f.HabilidadOfertas,
-                    OfertaCandidatos = f.OfertaCandidatos,
+                    EntradaOfeHab = f.EntradaOfeHab,
+                    EntradaOferCa = f.EntradaOferCa,
 
                 }).ToList(),
             })

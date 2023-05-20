@@ -11,12 +11,12 @@ namespace ProyectoBolsa.Controllers
     [Route("api/[controller]")]
     [ApiController]
 
-    public class HabilidadesTecnicasController : ControllerBase
+    public class A_HabilidadesTecnicasController : ControllerBase
     {
 
         private readonly IHabilidadService _habilidadService;
 
-        public HabilidadesTecnicasController(IHabilidadService habilidadService)
+        public A_HabilidadesTecnicasController(IHabilidadService habilidadService)
         {
             _habilidadService = habilidadService;
         }

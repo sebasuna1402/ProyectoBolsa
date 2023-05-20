@@ -23,7 +23,7 @@ namespace Services.Services
         public async Task<List<Candidato>> GetAll()
         {
             List<Candidato> listaCandidatos = await _context.Candidato
-            .Include(c => c.FormacionAcademicas)
+            .Include(c => c.FormacionAcads)
             .Select(c => new Candidato
             {
                 Id = c.Id,
@@ -33,11 +33,11 @@ namespace Services.Services
                 Direccion = c.Direccion,
                 Telefono = c.Telefono,
                 ResumenPersonal = c.ResumenPersonal,
-                HabilidadCandidatos = c.HabilidadCandidatos,
-                OfertaCandidatos = c.OfertaCandidatos,
+                EntradaHabilidadCa = c.EntradaHabilidadCa,
+                EntradaOferCa = c.EntradaOferCa,
 
 
-                FormacionAcademicas = c.FormacionAcademicas.Select(f => new FormacionAcademica
+                FormacionAcads = c.FormacionAcads.Select(f => new FormacionAcademica
                 {
                     Formacion = f.Formacion,
                     AñosEstudio = f.AñosEstudio,
@@ -55,7 +55,7 @@ namespace Services.Services
         public async Task<Candidato> GetById(int id)
         {
             var candidato = await _context.Candidato
-           .Include(c => c.FormacionAcademicas).Include(c => c.HabilidadCandidatos).Include(c => c.OfertaCandidatos)
+           .Include(c => c.FormacionAcads).Include(c => c.EntradaHabilidadCa).Include(c => c.EntradaOferCa)
            .FirstOrDefaultAsync(c => c.Id == id);
 
             return candidato;

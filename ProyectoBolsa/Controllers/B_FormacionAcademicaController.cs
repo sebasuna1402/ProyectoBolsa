@@ -10,11 +10,11 @@ namespace ProyectoBolsa.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class FormacionAcademicaController : ControllerBase
+    public class B_FormacionAcademicaController : ControllerBase
     {
         private readonly IFormacionService _formacionService;
 
-        public FormacionAcademicaController(IFormacionService formacionServiceService)
+        public B_FormacionAcademicaController(IFormacionService formacionServiceService)
         {
             _formacionService = formacionServiceService;
         }

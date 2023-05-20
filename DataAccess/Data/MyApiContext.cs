@@ -35,7 +35,7 @@ namespace ProyectoBolsa.Data
 
             modelBuilder.Entity<FormacionAcademica>()
             .HasOne(formacion => formacion.Candidato)
-            .WithMany(candidato => candidato.FormacionAcademicas)
+            .WithMany(candidato => candidato.FormacionAcads)
             .HasForeignKey(k => k.CandidatoId);
 
             modelBuilder.Entity<Oferta>()
@@ -54,12 +54,12 @@ namespace ProyectoBolsa.Data
 
             modelBuilder.Entity<EntradaHabilidadCa>()
                 .HasOne(ch => ch.Candidato)
-                .WithMany(c => c.HabilidadCandidatos)
+                .WithMany(c => c.EntradaHabilidadCa)
                 .HasForeignKey(ch => ch.CandidatoId);
 
             modelBuilder.Entity<EntradaHabilidadCa>()
                 .HasOne(ch => ch.HabilidadesTecnicas)
-                .WithMany(h => h.HabilidadCandidatos)
+                .WithMany(h => h.EntradaHabilidadCa)
                 .HasForeignKey(ch => ch.HabilidadId);
 
             // EntradaOfeHab
@@ -69,12 +69,12 @@ namespace ProyectoBolsa.Data
 
             modelBuilder.Entity<EntradaOfeHab>()
                 .HasOne(ch => ch.Oferta)
-                .WithMany(c => c.HabilidadOfertas)
+                .WithMany(c => c.EntradaOfeHab)
                 .HasForeignKey(ch => ch.OfertaId);
 
             modelBuilder.Entity<EntradaOfeHab>()
                 .HasOne(ch => ch.HabilidadesTecnicas)
-                .WithMany(h => h.HabilidadOfertas)
+                .WithMany(h => h.EntradaOfeHab)
                 .HasForeignKey(ch => ch.HabilidadId);
 
             // EntradaOferCa
@@ -84,12 +84,12 @@ namespace ProyectoBolsa.Data
 
             modelBuilder.Entity<EntradaOferCa>()
                 .HasOne(ch => ch.Candidato)
-                .WithMany(c => c.OfertaCandidatos)
+                .WithMany(c => c.EntradaOferCa)
                 .HasForeignKey(ch => ch.CandidatoId);
 
             modelBuilder.Entity<EntradaOferCa>()
                 .HasOne(ch => ch.Oferta)
-                .WithMany(h => h.OfertaCandidatos)
+                .WithMany(h => h.EntradaOferCa)
                 .HasForeignKey(ch => ch.CandidatoId);
 
 

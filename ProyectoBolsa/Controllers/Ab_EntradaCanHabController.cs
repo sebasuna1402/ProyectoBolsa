@@ -10,11 +10,11 @@ namespace ProyectoBolsa.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class EntradaCanHabController : Controller
+    public class Ab_EntradaCanHabController : Controller
     {
         private readonly IEntradaHabilidadCaService _candidatohabilidadService;
 
-        public EntradaCanHabController(IEntradaHabilidadCaService candidatohabilidadService)
+        public Ab_EntradaCanHabController(IEntradaHabilidadCaService candidatohabilidadService)
         {
             _candidatohabilidadService = candidatohabilidadService;
         }
