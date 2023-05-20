@@ -13,6 +13,8 @@ namespace DataAccess.Entidades
         public string ResumenPersonal { get; set; }
 
         
+
+
         public List<FormacionAcademica> FormacionAcads { get; set; }
         public List<EntradaHabilidadCa> EntradaHabilidadCa { get; set; }
         public List<EntradaOferCa> EntradaOferCa { get; set; }
